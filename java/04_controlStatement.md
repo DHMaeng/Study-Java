@@ -25,6 +25,8 @@ String foo = "Hello World";
 -> 출력값 true
 ```
 
+
+
 ## 2. == vs equals
 
 primitive(원시 데이터) 면 ==라 쓰고 아니라면 equals를 사용하자.
@@ -53,7 +55,78 @@ String o2 = new String("java"); 이 둘을 다르게 취급한다. 밑에 String
 
 
 
-## 3. switch문
+
+
+### 3. if 조건문
+
+#### 조건식의 연산 결과에 따라 블록 내부 문장의 실행 여부를 결정 할 수 있다.
+
+- if 문
+  - 조건식이 true 일 경우에만 실행문이 실행된다.
+  - if(조건식) 다음의 { } 를 생략할 수 있다. 하지만, 생략할 경우 if문에 포함되는 실행문은 단 한 줄만 포함된다.
+
+```java
+        if(조건식){
+            실행문;
+            실행문;
+        }
+```
+
+- if - else 문
+  - 조건식이 true일 경우 if 블록의 실행문이 실행되고, flase 일 경우 else 블록의 실행문이 실행된다.
+
+```java
+        if(조건식){
+            실행문;
+            실행문;
+        }else{
+            실행문;
+        }
+```
+
+- if - else if - else문
+  - 처음 if문의 조건식의 조건문이 true일 경우 처음 if문의 블록이 실행되고, false일 경우 다음 조건식의 결과에 따라 실행 블록이 달라진다.
+  - else if 문의 수는 제한이 없다. 그러나 너무 많은 else if 문은 실행 속도를 느리게 한다.
+  - 마지막 else 블록은 생략되도 상관없다.
+
+```java
+        if(조건식){
+            실행문;
+            실행문;
+        }else if(조건식){
+            실행문;
+        }else{
+            실행문;
+        }
+```
+
+
+
+### 4. 논리 연산자
+
+#### 논리연산자는 논리곱(&&,&) 논리합(||,|), 배타적 논리합 () 논리부정(!) 연산을 수행한다. 논리 연산자의 피연산자는 블린 타입만 사용할 수 있다. 결과는 불린값이다.
+
+```
+    boolean b1 = true;
+    boolean b2 = false;
+    boolean b3 = true;
+```
+
+- 논리곱 (&&, &) - 피연산자가 모두 true일 경우에만 연산 결과가 true 이다.
+  - System.out.println(b1 && b2); -> b2가 false 이므로 결과는 false
+  - System.out.println(b1 && b3); -> b1과 b2 모두 true 이므로 결과는 true
+- 논리합 (||,|) - 피연산자 중 하나만 true이면 연산 결과는 true 이다.
+  - System.out.println(b1 || b2); -> b1 이 true이므로 결과는 true 이다.
+- 배타적 논리합 () -> 피연산자가 서로 다른 값일 경우만 연산 결과가 true 이다.
+  - System.out.println(b1 ^ b2); -> b1은 true, b2는 false로 서로 다르므로 결과는 true 이다.
+  - System.out.println(b1 ^ b3); -> b1, b3 모두 true로 서로 같다. 결과는false 이다
+- 논리 부정 (!) -> 피연산자의 논리값을 바꾼다. true는 false로 false는 true로 바꾼다.
+  - System.out.println(!b1); -> b1 이 true 이므로 결과는 false 이다.
+  - System.out.println(!b2); -> b1 이 false 이므로 결과는 true 이다.
+
+
+
+## 5. switch문
 
 - switch문
 
