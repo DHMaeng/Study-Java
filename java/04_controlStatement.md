@@ -104,7 +104,7 @@ String o2 = new String("java"); 이 둘을 다르게 취급한다. 밑에 String
 
 ### 4. 논리 연산자
 
-#### 논리연산자는 논리곱(&&,&) 논리합(||,|), 배타적 논리합 () 논리부정(!) 연산을 수행한다. 논리 연산자의 피연산자는 블린 타입만 사용할 수 있다. 결과는 불린값이다.
+#### 논리연산자는 논리곱(&&,&) 논리합(||,|), 배타적 논리합 (^) 논리부정(!) 연산을 수행한다. 논리 연산자의 피연산자는 블린 타입만 사용할 수 있다. 결과는 불린값이다.
 
 ```
     boolean b1 = true;
@@ -117,7 +117,7 @@ String o2 = new String("java"); 이 둘을 다르게 취급한다. 밑에 String
   - System.out.println(b1 && b3); -> b1과 b2 모두 true 이므로 결과는 true
 - 논리합 (||,|) - 피연산자 중 하나만 true이면 연산 결과는 true 이다.
   - System.out.println(b1 || b2); -> b1 이 true이므로 결과는 true 이다.
-- 배타적 논리합 () -> 피연산자가 서로 다른 값일 경우만 연산 결과가 true 이다.
+- 배타적 논리합 (^) -> 피연산자가 서로 다른 값일 경우만 연산 결과가 true 이다. (xor) <->xnor
   - System.out.println(b1 ^ b2); -> b1은 true, b2는 false로 서로 다르므로 결과는 true 이다.
   - System.out.println(b1 ^ b3); -> b1, b3 모두 true로 서로 같다. 결과는false 이다
 - 논리 부정 (!) -> 피연산자의 논리값을 바꾼다. true는 false로 false는 true로 바꾼다.
@@ -126,8 +126,36 @@ String o2 = new String("java"); 이 둘을 다르게 취급한다. 밑에 String
 
 
 
-## 5. switch문
+### 5. 삼항 연산자
 
+- 조건식 ? 피연산자1 : 피연산자2
+
+  - 조건식의 연산결과가 true 이면, 결과는 피연산자 1이고, 조건식의 연산결과가 false 이면 결과는 피연산자2
+
+  ```java
+          int b1 = (5>4) ? 50 : 40;
+          //조건식이 true이므로 b1은 50이 된다. 
+  ```
+
+  - 피연산자1, 피연산자2 에는 주로 값이 오지만, 경우에 따라 연산식이 올 수 있다.
+  - 삼항 연산자가 익숙하지 않다면, if문으로 바꾸어 이용해도 좋다.
+
+```java
+            int b2 = 0;
+            if(5 > 4){
+                b2 = 50;
+            }else{
+                b2 = 40;
+            }
+```
+
+
+
+## 6. switch 문
+
+#### switch문은 어떤 변수의 값에 따라서 문장을 실행할 수 있도록 하는 제어문이다.
+
+- switch문에서 사용하는 키워드는 switch, case, default, break 이다.
 - switch문
 
 ```java
@@ -141,3 +169,60 @@ String o2 = new String("java"); 이 둘을 다르게 취급한다. 밑에 String
         default;    
     }
 ```
+
+```java
+int value = 1;
+
+    switch(value){
+        case 1: 
+            System.out.println("1");
+            break;
+        case 2:
+            System.out.println("2");
+            break;
+        case 3 :
+            System.out.println("3");
+            break;
+        default :
+            System.out.println("그 외의 숫자");
+    }
+```
+
+value의 값이 1일 경우 1을 출력하고, 2일 경우는 2를 출력하고, 3일 경우는 3을 출력하고, 그 외에는 그 외의 숫자가 출력된다.
+
+```java
+    case 1: 
+        System.out.println("1");
+    case 2:
+        System.out.println("2");
+    case 3 :
+        System.out.println("3");
+    default :
+        System.out.println("그 외의 숫자");
+```
+
+break를 제거하면 value가 1일 경우 1일 출력되고 switch문장을 빠져나가는 것이 아니라
+1,2,3, 그외의숫자가 연속해서 실행된다. break문장이 있을 경우와 없을 경우를 확실하게 구분할 수 있어야 합니다.
+
+
+
+### 참고 하세요
+
+JDK7이전에는 switch다음 괄호안에 정수타입의 변수만 올 수 있었습니다. 그런데 JDK7부터는 switch다음 괄호안에 문자열 타입의 변수도 올 수 있습니다.
+
+```java
+    String str = "A";
+
+    switch(str){
+        case "A": 
+            System.out.println("1");
+        case "B":
+            System.out.println("2");
+        case "C" :
+            System.out.println("3");
+        default :
+            System.out.println("그 외의 숫자");
+    }
+```
+
+문자열의 값에 따라서 case블록의 내용이 출력되는 것을 알 수 있습니다.
