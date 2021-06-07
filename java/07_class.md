@@ -191,3 +191,252 @@ class ReferenceTypeExam {
 하지만 참조형 타입은 다른 메소드에 매개변수로 전달될때, 변수의 주소가 전달됩니다. 예를들어 '몇번째 박스에 값이 있다'는 식으로 값이 들어있는 주소가 전달되는겁니다. 그럼 그걸 전달받은 메소드addOne에서는 그 박스에 가서 들어있는 값에 1 더합니다. addOne을 실행하고 나서 arr[0]을 확인해 볼 때도 같은 박스에 가서 값을 확인하기 때문에 값이 11로 변해있는겁니다.
 ```
 
+
+
+### String Class가 제공하는 메소드 이용하기
+
+- 문자열 길이 구하기
+  - str.length()는 str이 참조하는 문자열의 길이를 구해서 int 타입으로 리턴해주는 메소드 이다.
+
+```java
+    System.out.println(str.length());  //str
+```
+
+- 문자열 붙히기 (concat)
+  - str.concat("world") 메소드는 str 이 참조하는 문자열 hello 에다가 메소드의 인자로 들어온 문자열 world 를 붙혀서 String 타입으로 리턴하는 메소드다.
+  - String Class는 불변 클래스로, 메소드가 수행되면, 새로운 문자열을 만든다. 그러므로, 원래 클래스는 변하지 않는다.
+
+```java
+    String str = new String("hello");
+
+    System.out.println(str.concat(" world"));  //출력결과는 hello world 
+    System.out.println(str);  //출력결과는 hello 
+    str=str.concat(" world");
+  	System.out.println(str); //출력결과는 hello world 
+```
+
+- 문자열 자르기 (subString) // ~이상 ~미만
+  - 문자열의 인덱스는 0번 부터 시작한다. // h가 0
+  - str.subString(1,3) 은 str이 참조하는 문자열을 인덱스 1번부터 3번까지 자른 결과이다.
+  - str.subString(2) 은 str이 참조하는 문자열을 2번 인덱스부터 마지막까지 자른 결과를 의미한다.
+
+```java
+    System.out.println(str.substring(1, 3)); //출력결과  el
+    System.out.println(str.substring(2));   //출력결과 llo world
+```
+
+
+
+### static(class2참조)
+
+>static은 '정적'의 의미를 가지며 이것이 붙는다면 그 필드나 메서드는 클래스 형식이라는 의미. 안 붙는다면 그 필드 및 메서드는 인스턴스 형식이라는 의미.
+
+- 같은 클래스 내에 있음에도 해당 변수들을 사용할 수 없다.
+- main 메소드는 static 이라는 키워드로 메소드가 정의되어 있다. 이런 메서드를 static 한 메소드 라고 한다.
+- static한 필드(필드 앞에 static 키워드를 붙힘)나, static한 메소드는 Class가 인스턴스화 되지 않아도 사용할 수 있다.
+
+```java
+    public class VariableScopeExam {
+        int globalScope = 10; 
+        static int staticVal = 7;
+
+        public void scopeTest(int value){
+            int localScope = 20;        
+        }
+
+        public static void main(String[] args) {
+            System.out.println(staticVal);      //사용가능 
+        }
+
+    }
+```
+
+##### static한 변수는 공유된다.
+
+- static하게 선언된 변수는 값을 저장할 수 있는 공간이 하나만 생성된다. 그러므로, 인스턴스가 여러개 생성되도 static한 변수는 하나다. 즉 공간이 하나기때문에 값을 공유한다.
+
+```java
+    ValableScopeExam v1 = new ValableScopeExam();
+    ValableScopeExam v2 = new ValableScopeExam();
+    v1.golbalScope = 20;
+    v2.golbalScope = 30; 
+
+    System.out.println(v1.golbalScope);  //20 이 출력된다. 
+    System.out.println(v2.golbalScope);  //30이 출력된다. 
+
+    v1.staticVal = 10;
+    v2.staticVal = 20; 
+
+    System.out.println(v1.statVal);  //20 이 출력된다. 
+    System.out.println(v2.statVal);  //20 이 출력된다. 
+```
+
+- golbalScope같은 변수(필드)는 인스턴스가 생성될때 생성되기때문에 인스턴스 변수라고 한다.
+- staticVal같은 static한 필드를 클래스 변수라고 한다.
+- 클래스 변수는 레퍼런스.변수명 하고 사용하기 보다는 클래스명.변수명 으로 사용하는것이 더 바람직하다고 하다.
+  - VariableScopeExam.staticVal
+
+
+
+
+
+### 생성자
+
+#### 모든 클래스는 인스턴스화 될때 생성자를 사용한다.
+
+#### 생성자의 특징
+
+- 생성자는 리턴타입이 없다.
+- 생성자를 프로그래머가 만들지 않으면 매개변수가 없는 생성자가 컴파일할 때 자동으로 만들어진다.
+- 매개변수가 없는 생성자를 기본생성자라고 한다.
+- 생성자를 하나라도 프로그래머가 만들었다면 기본생성자는 자동으로 만들어지지 않는다.
+
+#### 생성자의 역할
+
+- 생성자가 하는 일은 객체가 될 때 필드를 초기화 하는 역할을 수행한다.
+- 자동차가 객체가 될때 반드시 이름을 가지도록 하려면,Car클래스를 다음과 같이 만들어야 한다.
+
+```java
+    public class Car{
+        String name;
+        int number;
+
+        public Car(String n){
+            name = n;
+        }
+    }
+```
+
+- 위의 Car 클래스를 이용하여 Car 인스턴스를 생성하는 방법
+
+```java
+    public class CarExam2{
+        public static void main(String args[]){
+
+            Car c1 = new Car("소방차");
+            Car c2 = new Car("구급차");
+            //Car c3 = new Car(); // 컴파일 오류가 발생합니다.
+
+            System.out.println(c1.name);
+
+            System.out.println(c2.name);
+        }
+    }
+```
+
+- Car클래스는 기본 생성자를 가지지 않는다. 그래서 기본생성자로 Car 객체를 생성할 수 없다.
+
+
+
+
+
+### 메소드 오버로딩
+
+#### 매개변수의 유형과 개수가 다르게 하여 같은 이름의 메소드를 여러 개 가질 수 있게하는 기술
+
+#### 메소드 오버로딩
+
+- 이름은 같지만 매개변수가 다른 메소드
+
+```java
+    class MyClass2{
+        public int plus(int x, int y){
+            return x+y;
+        }
+
+        public int plus(int x, int y, int z){
+            return x + y + z;
+        }
+
+        public String plus(String x, String y){
+            return x + y;
+        }
+    }
+```
+
+- 메소드 오버로딩은 매개변수 부분이 달라야 한다.
+
+```java
+    public int plus(int i, int f){
+        return i+f;
+    }
+```
+
+- 위처럼 변수명은 다르지만, 매개변수의 타입과 개수가 동일한 메소드를 또 정의 할 수는 없다.
+
+### 오버로딩된 메소드 이용하기
+
+- 메소드의 인자에 어떤 값이 쓰이느냐에 따라서 각기 다른 메소드가 호출된다.
+
+```java
+    public MethodOverloadExam{
+        public static void main(String args[]){
+            MyClass2 m = new MyClass2();
+            System.out.println(m.plus(5,10));
+            System.out.println(m.plus(5,10,15));
+            System.out.println(m.plus("hello" + " world"));
+        }
+    }
+```
+
+### 생성자 오버로딩
+
+#### 생성자의 매개변수의 유형과 개수가 다르게 하여 같은 이름의 생성자를 여러 개 가질 수 있다.
+
+- 생성자도 메소드와 마찬가지로 여러개를 선언할 수 있다.
+- 매개변수의 수와 타입이 다르다면 여러개의 생성자를 선언할 수 있다.
+
+```java
+    public class Car{
+        String name;
+        int number;
+
+        public Car(){
+
+        }
+
+        public Car(String name){
+            this.name = name;
+        }
+
+        public Car(String name, int number){
+            this.name = name;
+            this.number = number;
+        }
+    }
+```
+
+#### 오버로딩된 생성자 이용하기
+
+```java
+    public class CarExam4{
+        public static void main(String args[]){
+            Car c1 = new Car();
+            Car c2 = new Car("소방차");
+            Car c3 = new Car("구급차", 1234);
+        }
+    }
+```
+
+#### 자기 생성자 호출하는 this()
+
+- 기본생성자를 호출하였을 때 name을 "이름없음" , 숫자를 0으로 초기화 하기
+
+```java
+    public Car(){
+        this.name = "이름없음";
+        this.number = 0;
+    }
+```
+
+- 위처럼 작성했을 경우 코드의 중복이 일어난다.
+- 자신이 가지고 있는 다른 생성자를 이용할 수 있다.
+
+```java
+    public Car(){
+        this("이름없음", 0);
+    }
+```
+
+- this괄호 열고로 시작하면 자신의 생성자를 호출하는 것이다.
+- 자기 자신의 생성자를 호출함으로써 비슷한 코드가 중복되서 나오는 것을 방지할 수 있다.
