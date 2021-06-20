@@ -34,7 +34,7 @@
 
 [1. 하샤드 수](./algorithm/Harshad_number.md)
 
-
+[2. 휴대폰 번호 가리기](./algorithm/hide_cellphone.md)
 
 ## License
 
