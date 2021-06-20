@@ -1,4 +1,4 @@
-
+## Java basic
 
 [01. 자바 문서 보는법](./java/01_java.md)
 
@@ -27,6 +27,12 @@
 [10. 인터페이스2](./java/10_Interface2.md)
 
 [11. 예외처리](./java/11_Exception.md)
+
+
+
+## Java algorithm
+
+[1. 하샤드 수](./algorithm/Harshad_number.md)
 
 
 
