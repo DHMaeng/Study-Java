@@ -43,13 +43,15 @@ class Solution {
 
 **재귀함수풀이!!**
 
+gcd 함수는 호제법을 이용한 방법인데 호제법은 두수를 나누어서 나온 나머지를 이전 나머지에 다시 나누고, 그렇게 0 이 나올 때까지 반복한 후 중지한다. 중지했을 때, 바로 직전의 나머지가 최대공약수가 되는 것이다. 
+
 ```java
 import java.util.Arrays;
 class TryHelloWorld {
     public int[] gcdlcm(int a, int b) {
         int[] answer = new int[2];
 
-          answer[0] = gcd(a,b);
+        answer[0] = gcd(a,b);
         answer[1] = (a*b)/answer[0];
         return answer;
     }
@@ -57,7 +59,7 @@ class TryHelloWorld {
    public static int gcd(int p, int q)
    {
     if (q == 0) return p;
-    return gcd(q, p%q);
+    return gcd(q, p%q); //3 % 12 == 3
    }
 
     // 아래는 테스트로 출력해 보기 위한 코드입니다.
@@ -69,4 +71,24 @@ class TryHelloWorld {
 ```
 
 
+
+**유클리드 호제법이란?**
+
+유클리드 호제법은 A를 B로 나눈 나머지가 C일 때, (A와 B의 최대 공약수) = (B와 C의 최대 공약수)라는 사실을 이용해서 처음에 구하려고 했던 숫자의 크기를 점점 줄여 간단하게 만든 다음 최대 공약수를 구하는 방법이다.
+
+
+
+예를 들어, 48과 21의 최대 공약수를 구해본다면.
+
+48/21 ••• 6
+
+21/6 ••• 3
+
+6/3 ••• 0
+
+최대 공약수는 3이 된다.
+
+
+
+출처: https://mintparc.tistory.com/120 [829]
 
