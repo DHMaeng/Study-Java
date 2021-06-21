@@ -16,7 +16,7 @@
 
 [07. 클래스2](./java/07_class2.md)
 
-[08. final](./java/08. final.md)
+[08. final](./java/08_final.md)
 
 [09. 상속1](./java/09_Inheritance1.md)
 
@@ -32,9 +32,13 @@
 
 ## Java algorithm
 
-[1. 하샤드 수](./algorithm/Harshad_number.md)
+[1. 하샤드 수](./algorithm/1_Harshad_number.md)
 
-[2. 휴대폰 번호 가리기](./algorithm/hide_cellphone.md)
+[2. 휴대폰 번호 가리기](./algorithm/2_hide_cellphone.md)
+
+[3. 콜라츠 추측](./algorithm/3_Collatz.md)
+
+[2. 최대공약수 최소공배수](./algorithm/4_gcd_lcm.md)
 
 ## License
 
