@@ -38,7 +38,11 @@
 
 [3. 콜라츠 추측](./algorithm/3_Collatz.md)
 
-[2. 최대공약수 최소공배수](./algorithm/4_gcd_lcm.md)
+[4. 최대공약수 최소공배수](./algorithm/4_gcd_lcm.md)
+
+[5. 오픈채팅방](./algorithm/5_openchat.md)
+
+
 
 ## License
 
