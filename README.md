@@ -32,15 +32,17 @@
 
 ## Java algorithm
 
-[1. 하샤드 수](./algorithm/1_Harshad_number.md)
+[1. 하샤드 수](./algorithm/01_Harshad_number.md)
 
-[2. 휴대폰 번호 가리기](./algorithm/2_hide_cellphone.md)
+[2. 휴대폰 번호 가리기](./algorithm/02_hide_cellphone.md)
 
-[3. 콜라츠 추측](./algorithm/3_Collatz.md)
+[3. 콜라츠 추측](./algorithm/03_Collatz.md)
 
-[4. 최대공약수 최소공배수](./algorithm/4_gcd_lcm.md)
+[4. 최대공약수 최소공배수](./algorithm/04_gcd_lcm.md)
 
-[5. 오픈채팅방](./algorithm/5_openchat.md)
+[5. 오픈채팅방](./algorithm/05_openchat.md)
+
+[6. 문자열압축](./algorithm/06_compression.md)
 
 
 
