@@ -44,6 +44,12 @@
 
 [6. 문자열압축](./algorithm/06_compression.md)
 
+[7. Stack이란?](./algorithm/07_Stack.md)
+
+[8. 더 맵게(queue)](./algorithm/08_queue.md)
+
+[9. 제일 작은 수 제거하기](./algorithm/09_minimum.md)
+
 
 
 ## License
