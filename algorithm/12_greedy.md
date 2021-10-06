@@ -18,7 +18,7 @@
 
 
 
-### 풀이 1
+## 풀이 1
 
 ```java
 import java.util.Scanner;
@@ -50,7 +50,7 @@ public class Main {
 
 
 
-### 풀이 2
+## 풀이 2
 
 ```java
 import java.util.*;
@@ -89,7 +89,7 @@ class Main{public static void main(String[]t){
 
 
 
-### 풀이
+## 풀이
 
 ```java
 import java.util.Arrays;
@@ -160,7 +160,7 @@ public class Main {
 
 
 
-### 풀이 1
+## 풀이 1
 
 간단하게 나타내려고 할 수록 수학적인 계산이 많이 필요로 하는데 일케하는거 별로 인거 같음
 
@@ -183,7 +183,7 @@ public class Main {
 
 
 
-### 풀이2
+## 풀이2
 
 훨쒼 괜찮은듯 속도도 빠르고 직관적이다. 
 
@@ -233,7 +233,7 @@ public class Main {
 
 
 
-### 풀이
+## 풀이
 
 ```java
 import java.util.Scanner;
@@ -277,7 +277,7 @@ N(1 ≤ N ≤ 100,000)개의 로프가 있다. 이 로프를 이용하여 이런
 
 
 
-### 풀이
+## 풀이
 
 ```
 import java.util.Arrays;
@@ -341,7 +341,7 @@ public class Main {
 
 
 
-### 풀이
+## 풀이
 
 > 서브태스크 2번에 보면 출력값이 int 데이터 범위를 넘기 때문에 long으로 선언 해야 한다.
 
@@ -381,3 +381,281 @@ public class Main {
 }
 ```
 
+
+
+# 7. 알바생 강호
+
+## 문제
+
+스타박스는 손님을 입장시킬 때 독특한 방법으로 입장시킨다.
+
+스타박스에서는 손님을 8시가 될 때 까지, 문앞에 줄 세워 놓는다. 그리고 8시가 되는 순간 손님들은 모두 입구에서 커피를 하나씩 받고, 자리로 간다. 강호는 입구에서 커피를 하나씩 주는 역할을 한다.
+
+손님들은 입구에 들어갈 때, 강호에게 팁을 준다. 손님들은 자기가 커피를 몇 번째 받는지에 따라 팁을 다른 액수로 강호에게 준다. 각 손님은 강호에게 원래 주려고 생각했던 돈 - (받은 등수 - 1) 만큼의 팁을 강호에게 준다. 만약, 위의 식으로 나온 값이 음수라면, 강호는 팁을 받을 수 없다.
+
+예를 들어, 민호는 팁을 3원 주려고 했고, 재필이는 팁을 2원, 주현이가 팁을 1원 주려고 한 경우를 생각해보자.
+
+민호, 재필, 주현이 순서대로 줄을 서있다면, 민호는 강호에게 3-(1-1) = 3원, 재필이는 2-(2-1) = 1원, 주현이는 1-(3-1) = -1원을 팁으로 주게 된다. 주현이는 음수이기 때문에, 강호에게 팁을 주지 않는다. 따라서, 강호는 팁을 3+1+0=4원을 받게 된다.
+
+스타박스 앞에 있는 사람의 수 N과, 각 사람이 주려고 생각하는 팁이 주어질 때, 손님의 순서를 적절히 바꿨을 때, 강호가 받을 수 잇는 팁의 최댓값을 구하는 프로그램을 작성하시오.
+
+## 입력
+
+첫째 줄에 스타박스 앞에 서 있는 사람의 수 N이 주어진다. N은 100,000보다 작거나 같은 자연수이다. 둘째 줄부터 총 N개의 줄에 각 사람이 주려고 하는 팁이 주어진다. 팁은 100,000보다 작거나 같은 자연수이다.
+
+## 출력
+
+강호가 받을 수 있는 팁의 최댓값을 출력한다.
+
+
+
+## 풀이
+
+> 내림차순 할때 collections.reverseOrder()을 사용하기 때문에 객체인 Integer[]을 사용해야한다. 
+>
+> 팁들의 합 최대값이 int에 담을수 없기 때문에 long형 사용해야함
+
+```java
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Scanner;
+public class Main {
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in); 
+		//사람 수 입력
+		int N = sc.nextInt();
+		
+		//팁 입력
+		Integer[] tips = new Integer[N];
+		for(int i = 0 ; i < N ; i++) {
+			tips[i] = sc.nextInt();
+		}
+		
+		Arrays.sort(tips, Collections.reverseOrder());
+		
+		//팁 계산
+		long totalTip = 0;
+		for(int i = 0 ; i < N ; i++) {
+			if(tips[i]-i <= 0) {
+				break;
+			}
+			totalTip += tips[i] - i ;
+		}
+		
+		System.out.println(totalTip);
+	}	
+}
+```
+
+
+
+
+
+# 8. 2+1 세일
+
+| 시간 제한 | 메모리 제한 | 제출 | 정답 | 맞은 사람 | 정답 비율 |
+| :-------- | :---------- | :--- | :--- | :-------- | :-------- |
+| 1 초      | 64 MB       | 2424 | 1387 | 1160      | 59.093%   |
+
+## 문제
+
+KSG 편의점에서는 과일우유, 드링킹요구르트 등의 유제품을 '2+1 세일'하는 행사를 하고 있습니다. KSG 편의점에서 유제품 3개를 한 번에 산다면 그중에서 가장 싼 것은 무료로 지불하고 나머지 두 개의 제품 가격만 지불하면 됩니다. 한 번에 3개의 유제품을 사지 않는다면 할인 없이 정가를 지불해야 합니다.
+
+예를 들어, 7개의 유제품이 있어서 각 제품의 가격이 10, 9, 4, 2, 6, 4, 3이고 재현이가 (10, 3, 2), (4, 6, 4), (9)로 총 3번에 걸쳐서 물건을 산다면 첫 번째 꾸러미에서는 13원을, 두 번째 꾸러미에서는 10원을, 세 번째 꾸러미에서는 9원을 지불해야 합니다.
+
+재현이는 KSG 편의점에서 친구들과 같이 먹을 총 N팩의 유제품을 구입하려고 합니다. 재현이를 도와 최소비용으로 유제품을 구입할 수 있도록 도와주세요!
+
+## 입력
+
+첫 번째 줄에는 유제품의 수 N (1 ≤ N ≤ 100,000)이 주어집니다.
+
+두 번째 줄부터 N개의 줄에는 각 유제품의 가격 Ci (1 ≤ Ci ≤ 100,000)가 주어집니다.
+
+## 출력
+
+재현이가 N개의 유제품을 모두 살 때 필요한 최소비용을 출력합니다. 정답은 2^31-1보다 작거나 같다.
+
+
+
+## 풀이
+
+```java
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Scanner;
+public class Main {
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in); 
+		//물건 수 입력
+		int N = sc.nextInt();
+		
+		//가격 입력
+		Integer[] cost = new Integer[N];
+		for(int i = 0 ; i < N ; i++) {
+			cost[i] = sc.nextInt();
+		}
+		
+		Arrays.sort(cost, Collections.reverseOrder());
+		
+		//팁 계산
+		int totalCost = 0;
+		for(int i = 0 ; i < N ; i++) {
+			if((i+1)%3 != 0) {
+				totalCost += cost[i];
+			}
+		}
+		
+		System.out.println(totalCost);
+	}	
+}
+
+```
+
+
+
+
+
+# 9. 서강근육맨
+
+## 문제
+
+로니 콜먼 동영상을 보고 보디빌더가 되기로 결심한 향빈이는 PT 상담을 받으러 서강헬스클럽에 갔다. 향빈이가 서강헬스클럽을 선택한 이유는 PT를 받을 때 사용하는 운동기구를 회원이 선택할 수 있다는 점 때문이다. 하지만, 서강헬스클럽은 항상 사람이 많아서 PT를 한 번 받을 때 운동기구를 최대 두 개까지만 선택할 수 있다.
+
+헬스장에 있는 N개의 운동기구를 한 번씩 사용해보고 싶은 향빈이는 PT를 받을 때마다 이전에 사용하지 않았던 운동기구를 선택하기로 계획을 세웠다. 그리고 비용을 절약하기 위해 PT를 받을 때 운동기구를 되도록이면 두 개를 사용하기로 했다. 예를 들어, 헬스장에 총 10개의 운동기구가 있을 경우 PT를 5번 받으면 모든 기구를 다 사용할 수 있다. 9개의 운동기구가 있는 경우에도 PT를 5번 받지만, 마지막 PT를 받을 때는 운동기구를 하나만 사용한다.
+
+하지만 향빈이는 운동기구를 선택하다가 큰 고민에 빠졌다. 왜냐하면 운동기구마다 근손실이 일어나는 정도가 다르기 때문이다. 어떤 운동기구는 자극이 잘 안 와서 근손실이 적게 일어나는데, 어떤 운동기구는 자극이 잘 와서 근손실이 많이 일어난다. 근손실이 죽음보다 무서운 향빈이는 PT를 한 번 받을 때의 근손실 정도가 M을 넘지 않도록 하고 싶다. 이때, M의 최솟값을 구해보자. 참고로, 운동기구를 두 개 사용해서 PT를 받을 때의 근손실 정도는 두 운동기구의 근손실 정도의 합이다.
+
+## 입력
+
+첫째 줄에 서강헬스클럽에 비치된 운동기구의 개수를 나타내는 정수 N이 주어진다. (1≤N≤10 000)
+
+둘째 줄에는 각 운동기구의 근손실 정도를 나타내는 정수 t1,t2,⋯,tN가 주어진다. (0≤ti≤10^18)
+
+## 출력
+
+ M의 최솟값을 출력한다.
+
+
+
+## 풀이
+
+> max값을 구할때는 maximum = Math.max(maximum, 비교값)을 이용하자
+
+```java
+import java.math.*;
+import java.util.Arrays;
+import java.util.Scanner;
+public class Main {
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in); 
+		//기구 수 입력
+		int N = sc.nextInt();
+		
+		//근손실 정도 입력
+		long[] loss = new long[N];
+		for(int i = 0 ; i < N ; i++) {
+			loss[i] = sc.nextLong();
+		}
+		
+		Arrays.sort(loss);
+		
+		//최소값 계산
+		long min = 0;
+		if(N%2 == 0) {
+			for(int i = 0 ; i < N/2 ; i++) {
+				if(min < loss[i] + loss[N-(i+1)]) {
+					min = loss[i] + loss[N-(i+1)];
+				}
+				//maxnum = Math.max(maxnum,weight[i]+weight[n-1-i]);
+			}
+		} else {
+			min = loss[N-1];
+			for(int i = 0 ; i < N/2 ; i++) {
+				if(min < loss[i] + loss[N-(i+2)]) {
+					min = loss[i] + loss[N-(i+2)];
+				}
+			}
+		}
+		System.out.println(min);
+	}	
+}
+```
+
+
+
+
+# 10. 회의실 배정
+
+## 문제
+
+한 개의 회의실이 있는데 이를 사용하고자 하는 N개의 회의에 대하여 회의실 사용표를 만들려고 한다. 각 회의 I에 대해 시작시간과 끝나는 시간이 주어져 있고, 각 회의가 겹치지 않게 하면서 회의실을 사용할 수 있는 회의의 최대 개수를 찾아보자. 단, 회의는 한번 시작하면 중간에 중단될 수 없으며 한 회의가 끝나는 것과 동시에 다음 회의가 시작될 수 있다. 회의의 시작시간과 끝나는 시간이 같을 수도 있다. 이 경우에는 시작하자마자 끝나는 것으로 생각하면 된다.
+
+## 입력
+
+첫째 줄에 회의의 수 N(1 ≤ N ≤ 100,000)이 주어진다. 둘째 줄부터 N+1 줄까지 각 회의의 정보가 주어지는데 이것은 공백을 사이에 두고 회의의 시작시간과 끝나는 시간이 주어진다. 시작 시간과 끝나는 시간은 231-1보다 작거나 같은 자연수 또는 0이다.
+
+## 출력
+
+첫째 줄에 최대 사용할 수 있는 회의의 최대 개수를 출력한다.
+
+
+
+## 풀이
+
+```java
+package algorithm;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Scanner;
+public class Main {
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in); 
+		//회의 수 입력
+		int N = sc.nextInt();
+		
+		//회의 시간 입력
+		int[][] time = new int[N][2];
+		for(int i = 0 ; i < N ; i++) {
+			time[i][0] = sc.nextInt();
+			time[i][1] = sc.nextInt();
+		}
+		
+		//끝나는 시간을 기준으로 정렬하기 위해 compare 재정의 
+		Arrays.sort(time, new Comparator<int[]>() {
+			
+			@Override
+			public int compare(int[] o1, int[] o2) {
+				
+				// 종료시간이 같을 경우 시작시간이 빠른순으로 정렬해야한다.  
+				if(o1[1] == o2[1]) {
+					return o1[0] - o2[0];
+				}
+				return o1[1] - o2[1];
+			}
+ 
+		});
+		
+		int count = 0;
+		int prev_end_time = 0;
+		
+		for(int i = 0; i < N; i++) {
+			
+			// 직전 종료시간이 다음 회의 시작 시간보다 작거나 같다면 갱신 
+			if(prev_end_time <= time[i][0]) {
+				prev_end_time = time[i][1];
+				count++;
+			}
+		}
+		System.out.println(count);
+	}
+}
+```
+
+#### 왜 종료시간을 기준으로 정렬을 해야할까?  : https://st-lab.tistory.com/145
+
+#### 자바 배열 / 객체 정렬 (comparable, comparator)(https://junlab.tistory.com/236)

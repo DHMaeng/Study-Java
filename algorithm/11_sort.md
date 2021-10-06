@@ -67,3 +67,6 @@ copyOfRange(배열, 시작인덱스, 종료인덱스) 메소드는 시작인덱�
 나머지 정렬들
 
 https://yadon079.github.io/2020/java/arrays-sort
+
+**Array를 정렬할때는 Array.sort()에서 구현하여 사용가능하고 예제처럼 List를 정렬하고자할때는 Collection.sort()를 사용한다.**
+
