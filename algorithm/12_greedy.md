@@ -658,4 +658,178 @@ public class Main {
 
 #### 왜 종료시간을 기준으로 정렬을 해야할까?  : https://st-lab.tistory.com/145
 
-#### 자바 배열 / 객체 정렬 (comparable, comparator)(https://junlab.tistory.com/236)
+#### 자바 배열 / 객체 정렬 (comparable, comparator)(https://st-lab.tistory.com/243)
+
+
+
+### comparator 사용법
+
+> 하지만 뺄셈을 사용하게 되면 overflow나 underflow가 발생할수있다. (주의)
+
+```java
+Collections.sort(list,new Comparator<Person>() { 
+    @Override 
+    public int compare(Person o1, Person o2) { 
+        //오름차순 정렬 
+        //음수, 0이 나오면 그대로
+        //양수가 나오면 바꾼다.
+        if(o1.getNo()<o2.getNo()) { 
+            //1,2,3 
+            return -1; 
+        } else if(o1.getNo()>o2.getNo()){ 
+            return 1; 
+        } else { return 0; }  
+    } 
+});
+    //그래서 오름차순은 이렇게 나타낼 수 있다. 
+    //return o1-o2;
+	//양수면 o1이 더 크므로 o1이랑 o2랑 자리를 바꾼다. 큰게 뒤로간다.
+    //내림차순으로 하고 싶으면
+    //return o2-o1; 
+    //양의 값이 나오면 바꾼다고 했으므로 o1이랑 o2랑 자리를 바꾼다. 큰게 앞으로 간다.
+```
+
+
+
+```
+Scanner sc = new Scanner(System.in); 
+		//식 입력
+		String equation = sc.next();
+		
+		String[] equations = equation.split("-");
+		
+		int result = Integer.parseInt(equations[0]);
+		for(int i = 1; i < equations.length; i++) {
+			result -= Integer.parseInt(equations[i]);
+		}
+		System.out.println(result);
+	}
+```
+
+
+
+# 11. 잃어버린 괄호
+
+## 문제
+
+세준이는 양수와 +, -, 그리고 괄호를 가지고 식을 만들었다. 그리고 나서 세준이는 괄호를 모두 지웠다.
+
+그리고 나서 세준이는 괄호를 적절히 쳐서 이 식의 값을 최소로 만들려고 한다.
+
+괄호를 적절히 쳐서 이 식의 값을 최소로 만드는 프로그램을 작성하시오.
+
+## 입력
+
+첫째 줄에 식이 주어진다. 식은 ‘0’~‘9’, ‘+’, 그리고 ‘-’만으로 이루어져 있고, 가장 처음과 마지막 문자는 숫자이다. 그리고 연속해서 두 개 이상의 연산자가 나타나지 않고, 5자리보다 많이 연속되는 숫자는 없다. 수는 0으로 시작할 수 있다. 입력으로 주어지는 식의 길이는 50보다 작거나 같다.
+
+## 출력
+
+첫째 줄에 정답을 출력한다.
+
+## 풀이
+
+```java
+package algorithm;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Scanner;
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in); 
+		//식 입력
+		String equation = sc.next();
+		
+		//-로 분리
+		String[] sub = equation.split("-");
+		
+		//초기값은 더해야하는데 max_value로 선언해야 뺼셈하면서 이 값이 나올 경우가 존재하지 않는다.
+		int result = Integer.MAX_VALUE;
+		
+		//덧셈하여 최소값 구하기
+		for(int i = 0 ; i < sub.length ; i++) {
+			//+로 분리
+			String[] add = sub[i].split("\\+");
+			
+            //덧셈
+			int temp = 0;
+			for(int j = 0 ; j < add.length ; j++) {
+				temp += Integer.parseInt(add[j]);
+			}
+			
+            //뺄셈
+			if(result == Integer.MAX_VALUE) {
+				result = temp;
+			} else {
+				result -= temp;
+			}
+		}
+		System.out.println(result);
+	}
+}
+```
+
+
+
+
+
+# 블로그2
+
+## 문제
+
+neighbor 블로그를 운영하는 일우는 매일 아침 풀고 싶은 문제를 미리 정해놓고 글을 올린다. 그리고 매일 밤 각각의 문제에 대하여, 해결한 경우 파란색, 해결하지 못한 경우 빨간색으로 칠한다. 일우는 각 문제를 칠할 때 아래와 같은 과정을 한 번의 작업으로 수행한다.
+
+1. 연속된 임의의 문제들을 선택한다.
+2. 선택된 문제들을 전부 원하는 같은 색으로 칠한다.
+
+![img](https://upload.acmicpc.net/72fda166-5e2c-42b4-a9c1-e52993a5c45e/-/preview/)
+
+예를 들어, 각 문제를 위와 같은 색으로 칠하려고 할 때, 1~2번 문제를 파란색, 3번을 빨간색, 4번을 파란색, 5번을 빨간색, 6~7번을 파란색, 8번을 빨간색으로 칠하는 작업을 순서대로 수행하면 6번의 작업을 거쳐야 한다. 하지만, 1~7번 문제를 파란색, 3번을 빨간색, 5번을 빨간색, 8번을 빨간색으로 순서대로 칠한다면 작업 횟수는 4번으로 가장 적다.
+
+일우는 매일 500,000문제까지 시도하기 때문에, 이 작업이 꽤나 귀찮아지기 시작했다. 그래서 가장 효율적인 방법으로 위 작업을 수행하기를 원한다. 일우를 도와 각 문제를 주어진 색으로 칠할 때 필요한 최소한의 작업 횟수를 구하는 프로그램을 작성하라.
+
+## 입력
+
+첫째 줄에 색을 칠해야 하는 문제의 수 *N* (1 ≤ *N* ≤ 500,000)이 주어진다.
+
+둘째 줄에 *N*개의 문자가 공백 없이 순서대로 주어진다. 각 문자는 *i*번째 문제를 어떤 색으로 칠해야 하는지를 의미하며, `R`은 빨간색, `B`는 파란색을 나타낸다. 그 외에 다른 문자는 주어지지 않는다.
+
+## 출력
+
+첫째 줄에 일우가 주어진 모든 문제를 원하는 색으로 칠할 때까지 필요한 작업 횟수의 최솟값을 출력하라.
+
+## 풀이
+
+```java
+import java.util.Scanner;
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in); 
+		//입력
+		int N = sc.nextInt();
+		String s = sc.next();
+		int B = 0;
+        int R = 0;
+
+        for (int i = 0; i < N; i++) {
+            char c = s.charAt(i);
+            if (c == 'R') {
+                R++;
+                while(i + 1 < N) {
+                    if (s.charAt(i + 1) == 'B') break;
+                    i++;
+                }
+            } else {
+                B++;
+                while (i + 1 < N) {
+                    if (s.charAt(i + 1) == 'R') break;
+                    i++;
+                }
+            }
+        }
+
+        System.out.println(Math.min(R, B) + 1);
+	}
+}
+```
+
