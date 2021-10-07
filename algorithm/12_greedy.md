@@ -773,7 +773,7 @@ public class Main {
 
 
 
-# 블로그2
+# 12. 블로그2
 
 ## 문제
 
@@ -829,6 +829,138 @@ public class Main {
         }
 
         System.out.println(Math.min(R, B) + 1);
+	}
+}
+```
+
+
+
+# 13. 동전 0
+
+## 문제
+
+준규가 가지고 있는 동전은 총 N종류이고, 각각의 동전을 매우 많이 가지고 있다.
+
+동전을 적절히 사용해서 그 가치의 합을 K로 만들려고 한다. 이때 필요한 동전 개수의 최솟값을 구하는 프로그램을 작성하시오.
+
+## 입력
+
+첫째 줄에 N과 K가 주어진다. (1 ≤ N ≤ 10, 1 ≤ K ≤ 100,000,000)
+
+둘째 줄부터 N개의 줄에 동전의 가치 Ai가 오름차순으로 주어진다. (1 ≤ Ai ≤ 1,000,000, A1 = 1, i ≥ 2인 경우에 Ai는 Ai-1의 배수)
+
+## 출력
+
+첫째 줄에 K원을 만드는데 필요한 동전 개수의 최솟값을 출력한다.
+
+
+
+## 풀이
+
+```java
+import java.util.Scanner;
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in); 
+		//입력
+		int N = sc.nextInt();
+		int K = sc.nextInt();
+		int[] A = new int[N];
+		for(int i = 0 ; i < N ; i++) {
+			A[i] = sc.nextInt();
+		}
+		
+		int count = 0;
+		for(int i = N-1 ; i >= 0 ; i--) {
+			count += K/A[i];
+			K %= A[i];
+		}
+		
+        System.out.println(count);
+	}
+}
+```
+
+
+
+# 14. 민겸 수
+
+## 문제
+
+민겸이는 로마 숫자를 보고 굉장히 흥미롭다고 생각했다. 그래서 민겸이는 새로운 수 체계인 민겸 수를 창조했다.
+
+민겸 숫자는 0 이상의 정수 *N*에 대해 10*N* 또는 5 × 10*N* 꼴의 십진수를 대문자 `M`과 `K`로 이루어진 문자열로 표기한다. 10*N* 꼴의 십진수는 *N* + 1개의 `M`으로, 5 × 10*N* 꼴의 십진수는 *N*개의 `M` 뒤에 1개의 `K`를 이어붙인 문자열로 나타낸다. 즉, 아래 표처럼 나타낼 수 있다.
+
+| 변환 전 | 변환 후 |
+| ------- | ------- |
+| `1`     | `M`     |
+| `5`     | `K`     |
+| `10`    | `MM`    |
+| `50`    | `MK`    |
+| `100`   | `MMM`   |
+| `500`   | `MMK`   |
+| `1000`  | `MMMM`  |
+| `5000`  | `MMMK`  |
+| `...`   | `...`   |
+
+민겸 수는 한 개 이상의 민겸 숫자를 이어붙여 만든다. 예를 들어, 민겸 수 `MKKMMK`는 `MK`, `K`, `MMK`의 세 민겸 숫자를 이어붙여 만들 수 있다.
+
+민겸 수를 십진수로 변환할 때는, 1개 이상의 민겸 숫자로 문자열을 분리한 뒤, 각각의 민겸 숫자를 십진수로 변환해서 순서대로 이어붙이면 된다. 민겸 숫자를 십진수로 변환하는 것은 십진수를 민겸 숫자로 변환하는 과정을 거꾸로 하면 된다. 예를 들어, 민겸 수 `MKKMMK`는 아래 그림과 같이 여러 가지 십진수로 변환할 수 있다.
+
+![img](https://upload.acmicpc.net/3a65029c-5253-4600-8d93-908e4f368161/-/preview/)
+
+민겸이는 위와 같이 하나의 민겸 수가 다양한 십진수로 변환될 수 있다는 사실을 알았다. 문득 민겸이는 변환될 수 있는 십진수 중 가장 큰 값과 가장 작은 값이 궁금해졌다. 민겸이를 위해 하나의 민겸 수가 십진수로 변환되었을 때 가질 수 있는 최댓값과 최솟값을 구해주자.
+
+## 입력
+
+민겸 수 하나가 주어진다. 민겸 수는 대문자 `M`과 `K`로만 이루어진 문자열이며, 길이는 3,000을 넘지 않는다.
+
+## 출력
+
+주어진 민겸 수가 십진수로 변환되었을 때 가질 수 있는 값 중 가장 큰 값과 가장 작은 값을 두 줄로 나누어 출력한다.
+
+ ## 풀이
+
+```java
+import java.util.Scanner;
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in); 
+		//입력
+		String s = sc.next();
+
+		String min = "";
+		String max = "";
+		int count = 0;
+		for(int i = 0 ; i < s.length() ; i++) {
+			char c = s.charAt(i);
+			
+			if(c == 'M') {
+				if(count==0) {
+					min += "1";
+				} else {
+					min += "0";
+				}
+				count++;
+			} else {
+				min += "5";
+				max += "5";
+				if(count != 0) {
+					for(int j = 0; j < count ; j++) {
+						max += "0";
+					}
+				}
+				count = 0;
+			}
+		}
+		if(count != 0) {
+			for(int i = 0; i < count ; i++) {
+				max += "1";
+			}
+		}
+		
+		System.out.println(max);
+		System.out.println(min);
 	}
 }
 ```
