@@ -50,6 +50,12 @@
 
 [9. 제일 작은 수 제거하기](./algorithm/09_minimum.md)
 
+[10. 해쉬맵](./algorithm/10_hashmap.md)
+
+[11. 정렬](./algorithm/11_sort.md)
+
+[12. 그리디](./algorithm/12_greedy.md)
+
 
 
 ## License
