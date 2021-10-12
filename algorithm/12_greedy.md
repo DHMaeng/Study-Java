@@ -1020,3 +1020,76 @@ public class Main {
 }
 ```
 
+
+
+# 16. 강의실 배정
+
+## 문제
+
+수강신청의 마스터 김종혜 선생님에게 새로운 과제가 주어졌다. 
+
+김종혜 선생님한테는 Si에 시작해서 Ti에 끝나는 N개의 수업이 주어지는데, 최소의 강의실을 사용해서 모든 수업을 가능하게 해야 한다. 
+
+참고로, 수업이 끝난 직후에 다음 수업을 시작할 수 있다. (즉, Ti ≤ Sj 일 경우 i 수업과 j 수업은 같이 들을 수 있다.)
+
+수강신청 대충한 게 찔리면, 선생님을 도와드리자!
+
+## 입력
+
+첫 번째 줄에 N이 주어진다. (1 ≤ N ≤ 200,000)
+
+이후 N개의 줄에 Si, Ti가 주어진다. (0 ≤ Si < Ti ≤ 109)
+
+## 출력
+
+강의실의 개수를 출력하라.
+
+## 풀이
+
+> 우선순위 큐를 이용하면 자동으로 정렬(지금은 오름차순으로 선언해서 오름차순으로)해준다. 그래서 peek값(우선순위가 가장 높은값)에 자동적으로 제일 작은 값이 들어오게 되고 그에 따라 peek값보다 같거나 큰값이 들어온다면 원래의 peek값을 빼고 들어온 값을 넣어준 뒤 pq에 있는 최소값이 새로운 peek값이 된다. 아니라면 강의실 갯수를 추가시켜준다.
+
+```java
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.PriorityQueue;
+import java.util.Scanner;
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in); 
+		//입력
+		int N = sc.nextInt();
+		int[][] times = new int[N][2];
+		for(int i = 0 ; i < N ; i++) {
+			times[i][0] = sc.nextInt();
+			times[i][1] = sc.nextInt();
+		}
+		//입력 데이터를 오름차순으로 정렬(시작 시간이 같다면, 끝나느 시간을 오름차순으로)
+		Arrays.sort(times, new Comparator<int[]>() {
+
+			@Override
+			public int compare(int[] o1, int[] o2) {
+				if(o1[0] == o2[0]) return o1[1] - o2[1];
+				return o1[0]-o2[0];
+			}	
+		});
+		//우선순위 큐를 선언해주고 배열의 첫번째 종료시간을 큐에 넣는다.
+		PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
+		pq.add(times[0][1]);
+		//배열을 두 번째 값부터 순회하면서
+		for(int i = 1 ; i < N ; i++) {
+			//start가 peek()값보다 작거나 같다면, pq에서 하나 뺀다
+			if(pq.peek() <= times[i][0]) {
+				pq.poll(); //값을 제거할 시 우선순위가 가장 높은 값이 제거된다.
+			}
+			//순회하면서 현재 end값을 새로 pq에 넣는다.
+			pq.add(times[i][1]);
+		}
+		//pq에 남아있는 데이터의 갯수가 강의실의 갯수이다.
+		System.out.println(pq.size());
+		sc.close();
+	}
+}
+```
+
+
+
